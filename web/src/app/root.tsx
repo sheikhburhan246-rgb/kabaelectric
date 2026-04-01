@@ -444,7 +444,7 @@ export function Layout({ children }: { children: ReactNode }) {
       <body>
         <ClientOnly loader={() => children} />
         <Toaster position={isMobile ? 'top-center' : 'bottom-right'} />
-        <ScrollRestoration />
+        <ScrollRestoration getKey={(location) => location.key} />
         <Scripts />
         <script src="https://kit.fontawesome.com/2c15cc0cc7.js" crossOrigin="anonymous" async />
       </body>

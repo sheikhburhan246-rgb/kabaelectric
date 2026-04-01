@@ -1,4 +1,12 @@
 export function Navigation() {
+  const handleNavClick = (e, targetId) => {
+    e.preventDefault();
+    const el = document.getElementById(targetId);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <nav className="navbar">
       <div className="container nav-container">
@@ -12,22 +20,22 @@ export function Navigation() {
         </div>
         <ul className="nav-menu">
           <li>
-            <a href="#home">Home</a>
+            <a href="#home" onClick={(e) => handleNavClick(e, 'home')}>Home</a>
           </li>
           <li>
-            <a href="#services">Services</a>
+            <a href="#services" onClick={(e) => handleNavClick(e, 'services')}>Services</a>
           </li>
           <li>
-            <a href="#about">About</a>
+            <a href="#about" onClick={(e) => handleNavClick(e, 'about')}>About</a>
           </li>
           <li>
-            <a href="#pricing">Pricing</a>
+            <a href="#pricing" onClick={(e) => handleNavClick(e, 'pricing')}>Pricing</a>
           </li>
           <li>
-            <a href="#gallery">Gallery</a>
+            <a href="#gallery" onClick={(e) => handleNavClick(e, 'gallery')}>Gallery</a>
           </li>
           <li>
-            <a href="#contact">Contact</a>
+            <a href="#contact" onClick={(e) => handleNavClick(e, 'contact')}>Contact</a>
           </li>
         </ul>
         <a href="tel:6138070621" className="btn-cta-nav">
