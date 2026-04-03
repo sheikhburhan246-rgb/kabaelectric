@@ -1,26 +1,64 @@
+import { useRef, useState } from "react";
+import emailjs from "@emailjs/browser";
+
 export function ContactForm() {
+  const formRef = useRef();
+  const [status, setStatus] = useState(null);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setStatus("sending");
+
+    try {
+      await emailjs.sendForm(
+        "service_cdvegre",
+        "template_4fortuj",
+        formRef.current,
+        "wAUeTneuy2d5YW7DZ"
+      );
+      setStatus("success");
+      formRef.current.reset();
+    } catch (error) {
+      console.error("EmailJS error:", error);
+      setStatus("error");
+    }
+  };
+
   return (
     <div className="contact-form-container">
-      <form className="contact-form">
+      <form className="contact-form" ref={formRef} onSubmit={handleSubmit}>
         <div className="form-group">
-          <input type="text" placeholder="Your Name" required />
+          <input type="text" name="from_name" placeholder="Your Name" required />
         </div>
         <div className="form-group">
-          <input type="email" placeholder="Your Email" required />
+          <input type="email" name="from_email" placeholder="Your Email" required />
         </div>
         <div className="form-group">
-          <input type="tel" placeholder="Your Phone" required />
+          <input type="tel" name="phone" placeholder="Your Phone" required />
         </div>
         <div className="form-group">
           <textarea
+            name="message"
             rows="5"
             placeholder="Tell us about your project..."
             required
           ></textarea>
         </div>
-        <button type="submit" className="btn btn-submit">
-          <i className="fas fa-paper-plane"></i> Send Message
+        <button type="submit" className="btn btn-submit" disabled={status === "sending"}>
+          <i className="fas fa-paper-plane"></i>{" "}
+          {status === "sending" ? "Sending..." : "Send Message"}
         </button>
+
+        {status === "success" && (
+          <p style={{ color: "green", marginTop: "10px" }}>
+            ✅ Message sent! We'll be in touch soon.
+          </p>
+        )}
+        {status === "error" && (
+          <p style={{ color: "red", marginTop: "10px" }}>
+            ❌ Something went wrong. Please try again or call us directly.
+          </p>
+        )}
       </form>
     </div>
   );
