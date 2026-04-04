@@ -11,10 +11,10 @@ export function ContactForm() {
 
     try {
       await emailjs.sendForm(
-        "service_cdvegre",
-        "template_4fortuj",
+        "service_5ha438d",
+        "template_fknn6im",
         formRef.current,
-        "wAUeTneuy2d5YW7DZ"
+        "Bks3Y_roBBcdFu-4J"
       );
       setStatus("success");
       formRef.current.reset();
